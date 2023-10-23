@@ -1,0 +1,61 @@
+CREATE DATABASE `ownproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+
+CREATE TABLE `booking_details` (
+  `order_id` varchar(145) NOT NULL,
+  `product_sno` varchar(145) NOT NULL,
+  `product_name` varchar(45) NOT NULL,
+  `user_sno` varchar(145) NOT NULL,
+  `invoice_amount` decimal(10,2) NOT NULL,
+  `payment_mode` varchar(45) NOT NULL,
+  `phone_number` bigint NOT NULL,
+  `created_by` varchar(145) DEFAULT NULL,
+  `updated_by` varchar(145) DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  KEY `product_sno_idx` (`product_sno`),
+  KEY `user_sno_idx` (`user_sno`),
+  CONSTRAINT `product_sno` FOREIGN KEY (`product_sno`) REFERENCES `product_details` (`product_sno`),
+  CONSTRAINT `user_sno` FOREIGN KEY (`user_sno`) REFERENCES `user_details` (`s_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `product_details` (
+  `product_sno` varchar(245) NOT NULL,
+  `product_id` varchar(45) NOT NULL,
+  `product_name` varchar(45) NOT NULL,
+  `product_description` varchar(45) NOT NULL,
+  `product_category` varchar(45) NOT NULL,
+  `price` int NOT NULL,
+  `contact_number` bigint DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL,
+  `created_date` date NOT NULL,
+  `updated_by` varchar(45) DEFAULT NULL,
+  `updated_date` date NOT NULL,
+  PRIMARY KEY (`product_sno`),
+  UNIQUE KEY `product_sno_UNIQUE` (`product_sno`),
+  UNIQUE KEY `product_id_UNIQUE` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `user_details` (
+  `s_no` varchar(245) NOT NULL,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `gender` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `dob` date NOT NULL,
+  `age` int NOT NULL,
+  `location` varchar(45) NOT NULL,
+  `phone_number` bigint DEFAULT NULL,
+  `created_date` date DEFAULT NULL,
+  `created_by` varchar(45) DEFAULT NULL,
+  `updated_date` date DEFAULT NULL,
+  `updated_by` varchar(45) DEFAULT NULL,
+  `user_detailscol` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`s_no`),
+  UNIQUE KEY `s_no_UNIQUE` (`s_no`),
+  UNIQUE KEY `password_UNIQUE` (`password`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
